@@ -23,7 +23,7 @@ const playerSchema = new mongoose.Schema({
     type: String, // You can store a URL to the image
     required: true, // Set to true if you want to make the image mandatory
   }
-});
+}, { timestamps: true });
 
 const Player = mongoose.model('Player', playerSchema);
 

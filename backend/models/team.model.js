@@ -16,7 +16,7 @@ const teamSchema = new mongoose.Schema({
     default: 0,
     required: true
   }
-});
+}, { timestamps: true });
 
 const Team = mongoose.model('Team', teamSchema);
 

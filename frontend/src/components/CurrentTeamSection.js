@@ -7,6 +7,7 @@ import './CurrentTeamSection.css';
 const CurrentTeamSection = () => {
     const [team, setTeam] = useState(null); // State to hold team data
     const [loading, setLoading] = useState(true); // State to manage loading status
+    const [expanded, setExpanded] = useState(false); // State to manage view all players
     const teamId = '6716c303d4cd17dfe97853c0'; // Team ID to fetch
 
     useEffect(() => {
@@ -24,6 +25,11 @@ const CurrentTeamSection = () => {
         fetchTeam();
     }, []);
 
+    // Function to calculate total points of the team
+    const calculateTotalPoints = (players) => {
+        return players.reduce((total, player) => total + player.points, 0);
+    };
+
     // Show loading message while fetching
     if (loading) {
         return <div>Loading team data...</div>;
@@ -34,20 +40,24 @@ const CurrentTeamSection = () => {
         return <div>No team data available.</div>;
     }
 
-    const calculateTotalPoints = (players) => {
-        return players.reduce((total, player) => total + player.points, 0);
-    };
-
     // Calculate total points
     const teamPoints = calculateTotalPoints(team.players);
+
+    // Handle expand/collapse
+    const toggleExpand = () => {
+        setExpanded(!expanded);
+    };
+
+    // Get players to display (either 3 or all if expanded)
+    const displayedPlayers = expanded ? team.players : team.players.slice(0, 3);
 
     return (
         <div className="current-team-section">
             <div className="current-team-details">
-                <h2>{team.name}</h2> {/* Updated to use team.name */}
+                <h2>{team.name}</h2>
                 <div className="score-info">
                     <FaStar className="icon" />
-                    <span className="score">Current Score: {teamPoints}</span> {/* Assuming team has a score field */}
+                    <span className="score">Current Score: {teamPoints}</span>
                 </div>
                 <div className="players-info">
                     <FaUsers className="icon" />
@@ -55,11 +65,23 @@ const CurrentTeamSection = () => {
                 </div>
                 <div className="players-list">
                     <h3>Players:</h3>
-                    <ul>
-                        {team.players.map((player, index) => (
-                            <li key={index}>{player.name}</li>
+                    <div className="player-cards">
+                        {displayedPlayers.map((player, index) => (
+                            <div key={index} className="player-card">
+                                <img src={player.profileImage} alt={`${player.name}'s profile`} className="profile-image" />
+                                <div className="player-info">
+                                    <span className="player-name">{player.name}</span>
+                                    <span className="player-role">{player.role}</span>
+                                    <span className="player-points">Points: {player.points}</span>
+                                </div>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
+                    {team.players.length > 3 && (
+                        <button className="view-all-players" onClick={toggleExpand}>
+                            {expanded ? 'Show Less' : 'View All Players'}
+                        </button>
+                    )}
                 </div>
             </div>
 

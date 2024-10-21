@@ -1,55 +1,68 @@
 .player-list {
+    margin: 20px;
     padding: 20px;
-    background-color: #f8f9fa; /* Light background */
-}
-
-.player-list h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333; /* Darker text */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
 .player-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 15px;
 }
 
 .player-card {
-    background-color: #ffffff; /* White background for cards */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 15px;
-    width: 200px; /* Fixed width */
-    text-align: center;
-    transition: transform 0.2s; /* Animation */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    width: 200px; /* Fixed width for consistency */
+    transition: box-shadow 0.3s;
 }
 
 .player-card:hover {
-    transform: scale(1.05); /* Scale effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .player-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px; /* Rounded corners for images */
+    width: 100px; /* Image width */
+    height: 100px; /* Image height */
+    border-radius: 50%; /* Circular image */
+    margin-bottom: 10px;
 }
 
 .player-details {
-    margin: 10px 0;
+    text-align: center;
+}
+
+.player-name {
+    font-weight: bold;
+    margin: 0;
+}
+
+.player-role,
+.player-points {
+    margin: 5px 0;
+    color: #555;
 }
 
 .add-button {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #007bff; /* Bootstrap primary color */
+    margin-top: 10px;
+    background-color: #007bff;
     color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
     text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s; /* Animation */
+    text-align: center;
+    display: inline-block;
 }
 
 .add-button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3;
 }
