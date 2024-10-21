@@ -12,12 +12,16 @@ const playerSchema = new mongoose.Schema({
   },
   team: {
     type: String,
-    required: true
+    // required: true (you can enable this later if needed)
   },
   points: {
     type: Number,
     required: true,
     min: 0
+  },
+  profileImage: {
+    type: String, // You can store a URL to the image
+    required: true, // Set to true if you want to make the image mandatory
   }
 });
 

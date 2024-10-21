@@ -1,0 +1,55 @@
+.player-list {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background */
+}
+
+.player-list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Darker text */
+}
+
+.player-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.player-card {
+    background-color: #ffffff; /* White background for cards */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 15px;
+    width: 200px; /* Fixed width */
+    text-align: center;
+    transition: transform 0.2s; /* Animation */
+}
+
+.player-card:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.player-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Rounded corners for images */
+}
+
+.player-details {
+    margin: 10px 0;
+}
+
+.add-button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s; /* Animation */
+}
+
+.add-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}

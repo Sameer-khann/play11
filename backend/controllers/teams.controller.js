@@ -4,10 +4,12 @@ import Player from '../models/player.model.js';
 
 export const createTeam = async (req, res) => {
   try {
-    const { name, players } = req.body;
+    const { teamName, players } = req.body;
+
+    console.log("Team name is : ", teamName)
 
     // Check if team name and players are provided
-    if (!name || !players || players.length === 0) {
+    if (!teamName || !players || players.length === 0) {
       return res.status(400).json({ message: 'Team name and players are required.' });
     }
 
@@ -27,7 +29,7 @@ export const createTeam = async (req, res) => {
 
     // Create new team
     const newTeam = new Team({
-      name,
+      teamName,
       players,
       totalPoints
     });
@@ -39,11 +41,12 @@ export const createTeam = async (req, res) => {
   } catch (error) {
     console.error('Error creating team:', error);
     return res.status(500).json({
-      message: 'An error occurred while creating the team. Please try again later.',
+      message: 'An error occurred while creating the team. Please try again',
       error: error.message,
     });
   }
 };
+
 
 // Controller to get a team by ID
 export const getTeamById = async (req, res) => {
