@@ -11,16 +11,14 @@ import LoginSignup from './pages/LoginSignUp';
 function App() {
   return (
     <Router>
-      <>
         <Navbar />
         <div className="App">
           <Routes>
-            <Route path="/LoginSignup" element={<LoginSignup />} />
             <Route path="/" element={<Home />} />
+            <Route path="/LoginSignup" element={<LoginSignup />} />
             <Route path="/create-team" element={<CreateTeam />} />
           </Routes>
         </div>
-      </>
     </Router>
   );
 }

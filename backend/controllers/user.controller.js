@@ -37,12 +37,16 @@ export const signUp = async (req, res) => {
 export const login = async (req, res) => {
     const { email, password } = req.body;
 
+    //console.log("This is user's info : ", req.body)
+
     try {
         // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials.' });
         }
+
+        //console.log("This is user : ", user)
 
         // Check password
         const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -53,7 +57,8 @@ export const login = async (req, res) => {
         // Generate JWT token
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        res.status(200).json({ token, userId: user._id, name: user.name });
+        return res.status(200).json({ token, userId: user._id, name: user.name });
+
     } catch (error) {
         res.status(500).json({ message: 'Server error.' });
     }
