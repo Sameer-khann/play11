@@ -1,7 +1,8 @@
 // src/routes/user.routes.js
 import express from 'express';
 import { signUp, login, logout } from '../controllers/user.controller.js';
-import { isAuthenticated } from '../middleware/isAuthenticate.js';
+// import { isAuthenticated } from '../middleware/isAuthenticate.js';
+import { isAuthenticated } from '../middleware/IsAuthenticate.js';
 
 const router = express.Router();
 

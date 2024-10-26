@@ -6,12 +6,15 @@ import connectDB from "./utils/db.js";
 import players from "./routes/player.route.js"
 import teamRoutes from "./routes/team.route.js"
 import userRoutes from "./routes/user.route.js"
+import cookieParser from 'cookie-parser';
+
 
 
 dotenv.config({});
 
 const app = express();
 
+app.use(cookieParser());  // Add this middleware before any route definitions
 
 // middleware
 app.use(express.json());
@@ -24,9 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const corsOptions = {
-    origin: "http://localhost:3000",
+    origin: "https://localhost:3000",
     credentials: true,
 }
+
 app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;

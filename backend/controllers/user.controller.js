@@ -57,7 +57,13 @@ export const login = async (req, res) => {
         // Generate JWT token
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        return res.status(200).json({ token, userId: user._id, name: user.name });
+        // return res.status(200).json({ token, userId: user._id, name: user.name });
+
+        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'None'}).json({
+            message: `Welcome back ${user.fullname}`,
+            user,
+            success: true
+        })
 
     } catch (error) {
         res.status(500).json({ message: 'Server error.' });
@@ -71,5 +77,15 @@ export const logout = (req, res) => {
     // a more secure logout, you can invalidate the token here if you're
     // storing it in a database.
 
-    res.status(200).json({ message: 'User logged out successfully.' });
+    try {
+        return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+            message: "Logged out successfully.",
+            success: true
+        })
+    } catch (error) {
+        console.log("We are getting error here")
+        console.log(error);
+    }
+
+    // res.status(200).json({ message: 'User logged out successfully.' });
 };
