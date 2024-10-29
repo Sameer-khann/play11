@@ -43,7 +43,7 @@ export const login = async (req, res) => {
         // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: 'Invalid credentials.' });
+            return res.status(400).json({ message: 'Invalid email credentials.' });
         }
 
         //console.log("This is user : ", user)
@@ -51,7 +51,7 @@ export const login = async (req, res) => {
         // Check password
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(400).json({ message: 'Invalid credentials.' });
+            return res.status(400).json({ message: 'Invalid password credentials.' });
         }
 
         // Generate JWT token
@@ -60,7 +60,7 @@ export const login = async (req, res) => {
         // return res.status(200).json({ token, userId: user._id, name: user.name });
 
         return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true, sameSite: 'None'}).json({
-            message: `Welcome back ${user.fullname}`,
+            message: `Welcome back ${user.name}`,
             user,
             success: true
         })

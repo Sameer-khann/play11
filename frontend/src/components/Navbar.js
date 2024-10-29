@@ -13,15 +13,19 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const naviagte = useNavigate();
     const [isModalOpen, setModalOpen] = useState(false);
+    console.log("This is user from Navbar : ", user)
+    // console.log("This is user's TeamId' : ", user.team)
+
 
 
     const handleLogout = async () => {
         try {
-            await axios.post('https://localhost:8000/users/logout', {},
-                {
-                    withCredentials: true
-                });
+            // await axios.post('http://localhost:8000/users/logout', {},
+            //     {
+            //         withCredentials: true
+            //     });
             dispatch(clearUser());
+            setModalOpen(false)
             naviagte("/")
         } catch (error) {
             console.error('Logout has been failed:', error);
@@ -46,7 +50,7 @@ const Navbar = () => {
                             </div>
                         ) : (
                             <div className="nav-item profile" onClick={() => setModalOpen(true)}>
-                                <span>{user}</span> {/* Change this to user.name if it's an object */}
+                                <span>{user.name}</span>
                             </div>
                         )
                     }

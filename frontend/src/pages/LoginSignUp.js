@@ -36,10 +36,10 @@ const LoginSignup = () => {
                 email: formData.email,
                 password: formData.password,
             });
-            dispatch(setUser(response.data.name)); // Set user in Redux store
-            console.log("The API entire data : ", response)
+            console.log("The API response.data : ", response.data)
+            dispatch(setUser(response.data.user)); // Set user in Redux store
             console.log("The API data : ", response.data.user)
-            setMessage(response.data.message || 'Login successful!');
+            setMessage(response?.message || 'Login successful!');
             navigate("/")
         } catch (error) {
             setMessage(error.response?.data?.message || 'Login failed.');
@@ -77,15 +77,15 @@ const LoginSignup = () => {
     };
 
     // Handle user logout
-    const handleLogout = async () => {
-        try {
-            await axios.post('http://localhost:8000/users/logout');
-            dispatch(clearUser()); // Clear user from Redux store
-            setMessage('Successfully logged out');
-        } catch (error) {
-            setMessage(error.response?.data?.message || 'Logout failed.');
-        }
-    };
+    // const handleLogout = async () => {
+    //     try {
+    //         await axios.post('http://localhost:8000/users/logout');
+    //         dispatch(clearUser()); // Clear user from Redux store
+    //         setMessage('Successfully logged out');
+    //     } catch (error) {
+    //         setMessage(error.response?.data?.message || 'Logout failed.');
+    //     }
+    // };
 
     return (
         <div className="login-signup-container">
@@ -125,11 +125,11 @@ const LoginSignup = () => {
                 {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Login'}
             </p>
             {message && <p className="message">{message}</p>}
-            {isAuthenticated && isLogin && (
+            {/* {isAuthenticated && isLogin && (
                 <button onClick={handleLogout} className="logout-button" disabled={loading}>
                     Logout
                 </button>
-            )}
+            )} */}
         </div>
     );
 };
